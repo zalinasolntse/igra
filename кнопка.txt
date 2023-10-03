@@ -1,0 +1,35 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class RectangleObject : MonoBehaviour
+{
+    private bool isLit = false;
+    private Material originalMaterial;
+    public Material litMaterial;
+    private Vector3 targetPosition;
+
+    private void Start()
+    {
+        originalMaterial = GetComponent<Renderer>().material;
+    }
+
+    private void OnMouseDown()
+    {
+        if (isLit)
+        {
+            // Если объект светится, то перестаем это делать и возвращаем исходный материал
+            GetComponent<Renderer>().material = originalMaterial;
+            isLit = false;
+            //targetposition(1.98f,4.444f,4.184f);
+            transform.position=transform.position + new Vector3(0.0f,0.044f,0.0f);
+        }
+        else
+        {
+            // Если объект не светится, то начинаем его светить и меняем материал на светящийся
+            GetComponent<Renderer>().material = litMaterial;
+            isLit = true;
+            transform.position=transform.position + new Vector3(0.0f,-0.044f,0.0f);
+        }
+    }
+}

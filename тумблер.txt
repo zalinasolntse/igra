@@ -1,0 +1,33 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Tubler : MonoBehaviour
+{
+    private bool isOn = false;
+    private Material originalMaterial;
+    public Material red;
+
+    private void Start()
+    {
+        originalMaterial = GetComponent<Renderer>().material;
+    }
+
+    private void OnMouseDown()
+    {
+        if (isOn)
+        {
+            // Если объект светится, то перестаем это делать и возвращаем исходный материал
+            GetComponent<Renderer>().material = originalMaterial;
+            isOn = false;
+            transform.Rotate(20.0f, 0.0f,0.0f);
+        }
+        else
+        {
+            // Если объект не светится, то начинаем его светить и меняем материал на светящийся
+            GetComponent<Renderer>().material = red;
+            isOn = true;
+            transform.Rotate(-20.0f, 0.0f,0.0f);
+        }
+    }
+}
